@@ -22,8 +22,8 @@ class SearchResults extends Component {
         this.setState({ pageOfItems: pageOfItems });
     }
     render() {
-        const { meteorites } = this.props.meteorite;
-        if (meteorites.length === 0) {
+        const { meteorites, loading } = this.props.meteorite;
+        if (loading === true) {
             return (
                 <React.Fragment>
                     <SearchPanel items={meteorites} />
@@ -36,7 +36,24 @@ class SearchResults extends Component {
                                 <img src={require("../../assets/loader.gif")} className="loader" alt="Loading spinner" />
                             </tbody>
                         </table>
-                        <JwPagination items={meteorites} onChangePage={this.onChangePage} labels={customLabels} pageSize={100} />
+                    </section>
+                </React.Fragment>
+            )
+        } else if (meteorites.length === 0) {
+            return (
+                <React.Fragment>
+                    <SearchPanel items={meteorites} />
+                    <section className="table-responsive">
+                        <table className="table table-striped table-dark">
+                            <thead>
+                                <TableRow />
+                            </thead>
+                            <tbody>
+                                <div className="wrapper">
+                                    <h1 className="message">No results found :(</h1>
+                                </div>
+                            </tbody>
+                        </table>
                     </section>
                 </React.Fragment>
             )
@@ -69,7 +86,9 @@ SearchResults.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    meteorite: state.meteorite
+    meteorite: state.meteorite,
+    loading: state.loading,
+    error: state.error
 });
 
 const customLabels = {
