@@ -4,6 +4,8 @@ import { fetchMeteorites } from '../../actions/meteoriteActions'
 import Meteorite from '../Meteorite/Meteorite';
 import SearchPanel from '../../components/SearchPanel/SearchPanel';
 
+import JwPagination from 'jw-react-pagination';
+
 import PropTypes from 'prop-types';
 import './style.css';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -33,6 +35,7 @@ class SearchResults extends Component {
                                 <img src={require("../../assets/loader.gif")} className="loader" alt="Loading spinner" />
                             </tbody>
                         </table>
+                        <JwPagination items={meteorites} onChangePage={this.onChangePage} labels={customLabels} pageSize={100} />
                     </section>
                 </React.Fragment>
             )
@@ -45,11 +48,12 @@ class SearchResults extends Component {
                             <thead>
                             </thead>
                             <tbody>
-                                {meteorites.map((item, key) => {
+                                {this.state.pageOfItems.map((item, key) => {
                                     return <Meteorite key={key} meteorite={item} />
                                 })}
                             </tbody>
                         </table>
+                        <JwPagination items={meteorites} onChangePage={this.onChangePage} labels={customLabels} pageSize={100} />
                     </section>
                 </React.Fragment>
             )
