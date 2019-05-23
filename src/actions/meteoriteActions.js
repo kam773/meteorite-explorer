@@ -24,7 +24,7 @@ export const fetchMeteorites = (searchTerm) => (dispatch) => {
     if (searchTerm) {
         url = `https://data.nasa.gov/resource/gh4g-9sfh.json?$limit=50000&$offset=0&$where=lower(name)%20like%20lower(%22%25${searchTerm}%25%22)`;
     } else {
-        url = `https://data.nasa.gov/resource/gh4g-9sfh.json?$limit=50000&$offset=0`;
+        url = `https://data.nasa.gov/resource/gh4g-9sfh.json?$order=name&$limit=50000&$offset=0`;
     }
     return fetch(url)
         .then(handleErrors)
