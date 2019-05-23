@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import { fetchMeteorites } from '../../actions/meteoriteActions'
 import Meteorite from '../Meteorite/Meteorite';
 import SearchPanel from '../../components/SearchPanel/SearchPanel';
+import TableRow from '../TableRow/TableRow';
 import JwPagination from 'jw-react-pagination';
 
 import PropTypes from 'prop-types';
 import './style.css';
 import "bootstrap/dist/css/bootstrap.min.css";
+
 
 class SearchResults extends Component {
     state = {
@@ -28,7 +30,7 @@ class SearchResults extends Component {
                     <section className="table-responsive">
                         <table className="table table-striped table-dark">
                             <thead>
-
+                                <TableRow />
                             </thead>
                             <tbody>
                                 <img src={require("../../assets/loader.gif")} className="loader" alt="Loading spinner" />
@@ -45,6 +47,7 @@ class SearchResults extends Component {
                     <section className="table-responsive-sm">
                         <table className="table table-striped table-dark">
                             <thead>
+                                <TableRow />
                             </thead>
                             <tbody>
                                 {this.state.pageOfItems.map((item, key) => {
