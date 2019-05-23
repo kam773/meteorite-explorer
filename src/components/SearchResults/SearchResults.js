@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { fetchMeteorites } from '../../actions/meteoriteActions'
-// import TableRow from '../TableRow/TableRow';
-// import JwPagination from 'jw-react-pagination';
-// import Meteorite from '../Meteorite/Meteorite';
-// import SearchPanel from '../../components/SearchPanel/SearchPanel';
+import Meteorite from '../Meteorite/Meteorite';
+import SearchPanel from '../../components/SearchPanel/SearchPanel';
 
 import PropTypes from 'prop-types';
 import './style.css';
@@ -22,12 +20,40 @@ class SearchResults extends Component {
     }
     render() {
         const { meteorites } = this.props.meteorite;
-        console.log(meteorites)
+        if (meteorites.length === 0) {
+            return (
+                <React.Fragment>
+                    <SearchPanel items={meteorites} />
+                    <section className="table-responsive">
+                        <table className="table table-striped table-dark">
+                            <thead>
 
-        return (
-            <div></div>
-        )
-
+                            </thead>
+                            <tbody>
+                                <img src={require("../../assets/loader.gif")} className="loader" alt="Loading spinner" />
+                            </tbody>
+                        </table>
+                    </section>
+                </React.Fragment>
+            )
+        } else {
+            return (
+                <React.Fragment>
+                    <SearchPanel items={meteorites} />
+                    <section className="table-responsive-sm">
+                        <table className="table table-striped table-dark">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                {meteorites.map((item, key) => {
+                                    return <Meteorite key={key} meteorite={item} />
+                                })}
+                            </tbody>
+                        </table>
+                    </section>
+                </React.Fragment>
+            )
+        }
     }
 }
 
