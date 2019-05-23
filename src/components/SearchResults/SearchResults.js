@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { fetchMeteorites } from '../../actions/meteoriteActions'
 import Meteorite from '../Meteorite/Meteorite';
 import SearchPanel from '../../components/SearchPanel/SearchPanel';
-
 import JwPagination from 'jw-react-pagination';
 
 import PropTypes from 'prop-types';
